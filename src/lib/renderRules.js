@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
++import { Text, TouchableWithoutFeedback, View, Image, Dimensions, Platform } from 'react-native';
 
 import FitImage from 'react-native-fit-image';
 import openUrl from './util/openUrl';
 import hasParents from './util/hasParents';
 import applyStyle from './util/applyStyle';
+import AutoImage from 'react-native-markdown-renderer/src/lib/AutoImage';
 
 const renderRules = {
   // when unknown elements are introduced, so it wont break
@@ -230,7 +231,14 @@ const renderRules = {
   // br
   softbreak: (node, children, parent, styles) => <Text key={node.key}>{'\n'}</Text>,
   image: (node, children, parent, styles) => {
-    return <FitImage indicator={true} key={node.key} style={styles.image} source={{ uri: node.attributes.src }} />;
+    if (Platform.OS === 'ios') {
+          return <FitImage indicator={true} key={node.key} style={styles.image} source={{ uri: node.attributes.src }} />;
+        }
+        return (
+          <View>
+            <AutoImage url={node.attributes.src} style={styles.image}/>
+          </View>
+        )
   },
 };
 
