@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-+import { Text, TouchableWithoutFeedback, View, Image, Dimensions, Platform } from 'react-native';
+import { Text, TouchableWithoutFeedback, View, Image, Dimensions, Platform } from 'react-native';
 
 import FitImage from 'react-native-fit-image';
 import openUrl from './util/openUrl';
